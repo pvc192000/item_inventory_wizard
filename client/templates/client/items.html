@@ -6,11 +6,19 @@
 <body>
     <table>
         <tr>
-            <th>id</th>
-            <th>name</th>
-            <th>price</th>
-            <th>quantity</th>
+            {% if not sortAsc %}
+            <th><a href="{% url 'client-items' %}?sort=ID_ASC">id</a></th>
+            <th><a href="{% url 'client-items' %}?sort=NAME_ASC">name</a></th>
+            <th><a href="{% url 'client-items' %}?sort=PRICE_ASC">price</a></th>
+            <th><a href="{% url 'client-items' %}?sort=QUANTITY_ASC">quantity</a></th>
             <th>available by</th>
+            {% else %}
+            <th><a href="{% url 'client-items' %}?sort=ID_DESC">id</a></th>
+            <th><a href="{% url 'client-items' %}?sort=NAME_DESC">name</a></th>
+            <th><a href="{% url 'client-items' %}?sort=PRICE_DESC">price</a></th>
+            <th><a href="{% url 'client-items' %}?sort=QUANTITY_DESC">quantity</a></th>
+            <th>available by</th>
+            {% endif %}
         </tr>
         {% for item in items %}
         <tr>

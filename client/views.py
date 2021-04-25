@@ -16,7 +16,7 @@ def items(request):
     """Displays a table that contains all items"""
     cursor = connection.cursor()
     query = "SELECT * FROM item"
-
+    sortAsc = False
     # filter results
     if 'filter' in request.GET:
         param_filter = request.GET.get('filter')
@@ -27,31 +27,42 @@ def items(request):
     if 'sort' in request.GET:
         sort = request.GET.get('sort')
         # sort by quantity
-        if sort == 'QUANTITY_DESC':
-            query += ' ORDER BY quantity DESC'
-        elif sort == 'QUANTITY_ASC':
+        if sort == 'QUANTITY_ASC':
             query += ' ORDER BY quantity ASC'
+            sortAsc = True
+        elif sort == 'QUANTITY_DESC':
+            query += ' ORDER BY quantity DESC'
+            sortAsc = False
 
         # sort by name
         elif sort == "NAME_ASC":
             query += ' ORDER BY name ASC'
+            sortAsc = True
         elif sort == "NAME_DESC":
             query += " ORDER BY name DESC"
+            sortAsc = False
 
         # sort by id
         elif sort == "ID_ASC":
             query += " ORDER BY item_id ASC"
+            sortAsc = True
         elif sort == "ID_DESC":
             query += " ORDER BY item_id DESC"
+            sortAsc = False
 
         # sort by price
         elif sort == "PRICE_ASC":
             query += " ORDER BY price ASC"
+            sortAsc = True
         elif sort == "PRICE_DESC":
             query += " ORDER BY price DESC"
+            sortAsc = False
 
     cursor.execute(query + ";")
 
-    context = {'items': dictfetchall(cursor)}
+    context = {
+        'items': dictfetchall(cursor),
+        'sortAsc': sortAsc
+    }
 
     return render(request, "client/items.html", context)
