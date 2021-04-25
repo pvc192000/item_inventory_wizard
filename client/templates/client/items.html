@@ -6,18 +6,34 @@
 <body>
     <table>
         <tr>
-            {% if not sortAsc %}
-            <th><a href="{% url 'client-items' %}?sort=ID_ASC">id</a></th>
-            <th><a href="{% url 'client-items' %}?sort=NAME_ASC">name</a></th>
-            <th><a href="{% url 'client-items' %}?sort=PRICE_ASC">price</a></th>
-            <th><a href="{% url 'client-items' %}?sort=QUANTITY_ASC">quantity</a></th>
-            <th>available by</th>
+            {% if request.GET.filter %}
+                {% if not sortAsc %}
+                <th><a href="{% url 'client-items' %}?filter={{request.GET.filter}}&sort=ID_ASC">id</a></th>
+                <th><a href="{% url 'client-items' %}?filter={{request.GET.filter}}&sort=NAME_ASC">name</a></th>
+                <th><a href="{% url 'client-items' %}?filter={{request.GET.filter}}&sort=PRICE_ASC">price</a></th>
+                <th><a href="{% url 'client-items' %}?filter={{request.GET.filter}}&sort=QUANTITY_ASC">quantity</a></th>
+                <th>available by</th>
+                {% else %}
+                <th><a href="{% url 'client-items' %}?filter={{request.GET.filter}}&sort=ID_DESC">id</a></th>
+                <th><a href="{% url 'client-items' %}?filter={{request.GET.filter}}&sort=NAME_DESC">name</a></th>
+                <th><a href="{% url 'client-items' %}?filter={{request.GET.filter}}&sort=PRICE_DESC">price</a></th>
+                <th><a href="{% url 'client-items' %}?filter={{request.GET.filter}}&sort=QUANTITY_DESC">quantity</a></th>
+                <th>available by</th>
+                {% endif %}
             {% else %}
-            <th><a href="{% url 'client-items' %}?sort=ID_DESC">id</a></th>
-            <th><a href="{% url 'client-items' %}?sort=NAME_DESC">name</a></th>
-            <th><a href="{% url 'client-items' %}?sort=PRICE_DESC">price</a></th>
-            <th><a href="{% url 'client-items' %}?sort=QUANTITY_DESC">quantity</a></th>
-            <th>available by</th>
+                {% if not sortAsc %}
+                <th><a href="{% url 'client-items' %}?sort=ID_ASC">id</a></th>
+                <th><a href="{% url 'client-items' %}?sort=NAME_ASC">name</a></th>
+                <th><a href="{% url 'client-items' %}?sort=PRICE_ASC">price</a></th>
+                <th><a href="{% url 'client-items' %}?sort=QUANTITY_ASC">quantity</a></th>
+                <th>available by</th>
+                {% else %}
+                <th><a href="{% url 'client-items' %}?sort=ID_DESC">id</a></th>
+                <th><a href="{% url 'client-items' %}?sort=NAME_DESC">name</a></th>
+                <th><a href="{% url 'client-items' %}?sort=PRICE_DESC">price</a></th>
+                <th><a href="{% url 'client-items' %}?sort=QUANTITY_DESC">quantity</a></th>
+                <th>available by</th>
+                {% endif %}
             {% endif %}
         </tr>
         {% for item in items %}
