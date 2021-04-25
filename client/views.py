@@ -12,7 +12,7 @@ def dictfetchall(cursor):
     ]
 
 
-def store(request):
+def items(request):
     """Displays a table that contains all items"""
     cursor = connection.cursor()
     query = "SELECT * FROM item"
@@ -54,4 +54,4 @@ def store(request):
 
     context = {'items': dictfetchall(cursor)}
 
-    return render(request, "client/store.html", context)
+    return render(request, "client/items.html", context)

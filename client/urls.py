@@ -4,5 +4,5 @@ from client import views
 
 
 urlpatterns = [
-    path('', views.store, name='client-store'),
+    path('items', views.items, name='client-items'),
 ]
