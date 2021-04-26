@@ -3,16 +3,10 @@ from django.db import connection
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from client import forms
+from client.helper_funcs import dictfetchall
+from datetime import date
+
 # Create your views here.
-
-
-def dictfetchall(cursor):
-    "Return all rows from a cursor as a dict"
-    columns = [col[0] for col in cursor.description]
-    return [
-        dict(zip(columns, row))
-        for row in cursor.fetchall()
-    ]
 
 
 def items(request):
@@ -90,21 +84,27 @@ def order(request):
             # make changes to database
             for item in items:
                 if item["item_id"] == item_id:
-                    if item["quantity"] == quantity >= 0:
-                        pass
-                        # success
-                        # create new order
-                        # cursor.execute("INSERT INTO purchase (item_id, quantity, customer_id) VALUES ({}, {}, {})".format(item_id, quantity))
-                    else:
-                        pass
-                        # error, too many items
+                    if item["quantity"] - quantity >= 0:
+                        # obtain user id
+                        cursor.execute("SELECT customer_id FROM customer WHERE email = '{}';".format(
+                            request.user.email))
+                        customer_id = dictfetchall(cursor)[0]["customer_id"]
 
-                        # return user to items view
-            return HttpResponseRedirect("/client/items")
+                        # create new purchase row
+                        today = date.today().strftime("%Y-%m-%d")
+                        cursor.execute("INSERT INTO purchase (purchase_date, item_id, quantity, customer_id) VALUES ('{}', {}, {}, {});".format(
+                            today, item_id, quantity, customer_id))
 
+                        # Update quantity of item
+                        cursor.execute(
+                            "UPDATE item SET quantity = {} WHERE item_id = {};".format(item["quantity"] - quantity, item_id))
+
+                        return HttpResponseRedirect("/client/items")
     else:
         # blank form if GET request
         form = forms.OrderForm()
 
-    context = {'form': form}
+    context = {
+        'form': form,
+    }
     return render(request, 'client/order.html', context)
