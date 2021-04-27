@@ -78,7 +78,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'item_inventory_wizard_db',
         'USER': 'postgres',
-        'PASSWORD': '2000',
+        'PASSWORD': '2003',
         'HOST': 'localhost',
         
 

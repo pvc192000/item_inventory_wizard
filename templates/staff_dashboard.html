@@ -62,21 +62,27 @@
 
             <!-- Nav Item - Tables -->
             <li class="nav-item">
-                <a class="nav-link" href="items">
+                <a class="nav-link" href="items_staff">
                     <i class="fas fa-fw fa-table"></i>
                     <span>Items</span></a>
             </li>
 
             <li class="nav-item">
-                <a class="nav-link" href="suppliers">
+                <a class="nav-link" href="delivered_items">
                     <i class="fas fa-fw fa-table"></i>
-                    <span>Suppliers</span></a>
+                    <span>Delivered Items</span></a>
             </li>
 
             <li class="nav-item">
-                <a class="nav-link" href="sorders">
+                <a class="nav-link" href="item_orders">
                     <i class="fas fa-fw fa-table"></i>
-                    <span>Place a Supplier Order</span></a>
+                    <span>Orders List</span></a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="help">
+                    <i class="fas fa-fw fa-table"></i>
+                    <span>Help/Contact</span></a>
             </li>
 
             <!-- Divider -->
@@ -192,9 +198,9 @@
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
                                             <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                                Manager ID</div>
+                                                Staff ID</div>
                                             {% for i in info %}
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{i.manager_id}}</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{i.staff_id}}</div>
                                             {%endfor%}
                                         </div>
                                         <div class="col-auto">

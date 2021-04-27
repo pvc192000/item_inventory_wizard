@@ -16,7 +16,7 @@ def login(request):
             if user.is_superuser == True:
                 return redirect("manager/dashboard")
             elif user.is_staff == True:
-                return redirect("manager/dashboard")
+                return redirect("staff/staff_dashboard")
             else:
                 return redirect("manager/dashboard")
         else:
