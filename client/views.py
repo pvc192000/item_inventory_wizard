@@ -110,6 +110,7 @@ def order(request):
     return render(request, 'client/order.html', context)
 
 
+@login_required
 def purchases(request):
     """Table that shows all purchases made by customer"""
     cursor = connection.cursor()
