@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Purchase History</title>
+</head>
+<body>
+    <table>
+        <tr>
+            <th>id</th>
+            <th>name</a></th>
+            <th>price</th>
+            <th>quantity</th>
+            <th>date purchased</th>
+        </tr>
+        {% for item in items %}
+        <tr>
+            <td>{{ item.item_id }}</td>
+            <td>{{ item.name }}</td>
+            <td>{{ item.price }}</td>
+            <td>{{ item.quantity }}</td>
+            <td>{{ item.purchase_date }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

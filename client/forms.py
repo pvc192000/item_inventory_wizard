@@ -21,7 +21,7 @@ class OrderForm(forms.Form):
             id_exists = False
             for item in items:
                 if item["item_id"] == item_id:
-                    id_exists == True
+                    id_exists = True
                     if item["quantity"] - quantity < 0:
                         raise ValidationError("Not enough units in stock.")
 

@@ -108,3 +108,20 @@ def order(request):
         'form': form,
     }
     return render(request, 'client/order.html', context)
+
+
+def purchases(request):
+    """Table that shows all purchases made by customer"""
+    cursor = connection.cursor()
+    # obtain user id
+    cursor.execute("SELECT customer_id FROM customer WHERE email = '{}';".format(
+        request.user.email))
+    customer_id = dictfetchall(cursor)[0]["customer_id"]
+
+    # get all purchases from customer
+    query = "SELECT P.purchase_date, P.quantity, P.item_id, I.price, I.name FROM purchase P, item I WHERE P.customer_id={} AND P.item_id=I.item_id ORDER BY P.purchase_date DESC".format(
+        customer_id)
+    cursor.execute(query + ";")
+
+    context = {"items": dictfetchall(cursor)}
+    return render(request, "client/purchases.html", context)
