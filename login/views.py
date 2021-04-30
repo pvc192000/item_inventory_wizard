@@ -16,9 +16,9 @@ def login(request):
             if user.is_superuser == True:
                 return redirect("manager/dashboard")
             elif user.is_staff == True:
-                return redirect("manager/dashboard")
+                return redirect("staff/dashboard")
             else:
-                return redirect("manager/dashboard")
+                return redirect("customer/dashboard")
         else:
             messages.info(request, 'invalid credentials')
             return redirect('login')
