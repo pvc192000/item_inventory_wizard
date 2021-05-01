@@ -198,7 +198,13 @@
                                     </tfoot>
                                     <tbody>
                                         {% for item in items %}
+                                        {% if item.quantity == 0 %}
+                                        <tr class="table-danger">
+                                        {% elif item.quantity < 10 %}
+                                        <tr class="table-warning">
+                                        {% else %}
                                         <tr>
+                                        {% endif %}
                                             <td>{{ item.item_id }}</td>
                                             <td>{{ item.name }}</td>
                                             <td>${{ item.price }}</td>
