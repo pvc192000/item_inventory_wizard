@@ -1,17 +1,21 @@
 from django.contrib.auth.decorators import login_required
 from django.db import connection
 from django.http import HttpResponseRedirect
+from django.core.exceptions import PermissionDenied
 from django.shortcuts import render, redirect
 from customer import forms
 from customer.helper_funcs import dictfetchall
 from datetime import date
-from django.contrib.auth.models import User, auth 
+from django.contrib.auth.models import User, auth
 
 # Create your views here.
 
 
+@login_required
 def items(request):
     """Displays a table that contains all items"""
+    if request.user.is_staff or request.user.is_superuser:
+        raise PermissionDenied
     cursor = connection.cursor()
     query = "SELECT * FROM item"
     sortAsc = False
@@ -69,6 +73,8 @@ def items(request):
 @login_required
 def order(request):
     """Form where a customer can order an item"""
+    if request.user.is_staff or request.user.is_superuser:
+        raise PermissionDenied
     # fetch items from db
     cursor = connection.cursor()
     query = "SELECT item_id, quantity FROM item"
@@ -94,7 +100,7 @@ def order(request):
                         # create new purchase row
                         today = date.today().strftime("%Y-%m-%d")
                         cursor.execute("INSERT INTO purchase (purchase_date, item_id, quantity, customer_id) VALUES ('{}', {}, {}, {});".format(
-                            today, item_id, quantity, customer_id))       
+                            today, item_id, quantity, customer_id))
                         form = forms.OrderForm()
                         """Table that shows all purchases made by customer"""
                         cursor = connection.cursor()
@@ -108,8 +114,9 @@ def order(request):
                             customer_id)
                         cursor.execute(query + ";")
 
-                        context = {"items": dictfetchall(cursor), 'form': form,}
-                        return render(request, 'customerOrder.html', context)                
+                        context = {"items": dictfetchall(
+                            cursor), 'form': form, }
+                        return render(request, 'customerOrder.html', context)
     else:
         # blank form if GET request
         form = forms.OrderForm()
@@ -125,18 +132,23 @@ def order(request):
             customer_id)
         cursor.execute(query + ";")
 
-        context = {"items": dictfetchall(cursor), 'form': form,}
+        context = {"items": dictfetchall(cursor), 'form': form, }
         return render(request, 'customerOrder.html', context)
 
-    
 
+@login_required
 def dashboard(request):
+    if request.user.is_staff or request.user.is_superuser:
+        raise PermissionDenied
     cursor = connection.cursor()
-    cursor.execute("SELECT * FROM customer WHERE email = '%s';" %str(request.user.email))
+    cursor.execute("SELECT * FROM customer WHERE email = '%s';" %
+                   str(request.user.email))
 
     context = {'info': dictfetchall(cursor)}
-    return render(request,'customerDashboard.html', context)
+    return render(request, 'customerDashboard.html', context)
 
+
+@login_required
 def logout(request):
     auth.logout(request)
     return redirect('/')
