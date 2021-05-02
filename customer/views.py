@@ -101,39 +101,25 @@ def order(request):
                         today = date.today().strftime("%Y-%m-%d")
                         cursor.execute("INSERT INTO purchase (purchase_date, item_id, quantity, customer_id) VALUES ('{}', {}, {}, {});".format(
                             today, item_id, quantity, customer_id))
-                        form = forms.OrderForm()
-                        """Table that shows all purchases made by customer"""
-                        cursor = connection.cursor()
-                        # obtain user id
-                        cursor.execute("SELECT customer_id FROM customer WHERE email = '{}';".format(
-                            request.user.email))
-                        customer_id = dictfetchall(cursor)[0]["customer_id"]
 
-                        # get all purchases from customer
-                        query = "SELECT P.purchase_date, P.quantity, P.item_id, I.price, I.name FROM purchase P, item I WHERE P.customer_id={} AND P.item_id=I.item_id ORDER BY P.purchase_date DESC".format(
-                            customer_id)
-                        cursor.execute(query + ";")
-
-                        context = {"items": dictfetchall(
-                            cursor), 'form': form, }
-                        return render(request, 'customerOrder.html', context)
+                        return HttpResponseRedirect("/customer/order")
     else:
         # blank form if GET request
         form = forms.OrderForm()
-        """Table that shows all purchases made by customer"""
-        cursor = connection.cursor()
-        # obtain user id
-        cursor.execute("SELECT customer_id FROM customer WHERE email = '{}';".format(
-            request.user.email))
-        customer_id = dictfetchall(cursor)[0]["customer_id"]
+    """Table that shows all purchases made by customer"""
+    cursor = connection.cursor()
+    # obtain user id
+    cursor.execute("SELECT customer_id FROM customer WHERE email = '{}';".format(
+        request.user.email))
+    customer_id = dictfetchall(cursor)[0]["customer_id"]
 
-        # get all purchases from customer
-        query = "SELECT P.purchase_date, P.quantity, P.item_id, I.price, I.name FROM purchase P, item I WHERE P.customer_id={} AND P.item_id=I.item_id ORDER BY P.purchase_date DESC".format(
-            customer_id)
-        cursor.execute(query + ";")
+    # get all purchases from customer
+    query = "SELECT P.purchase_date, P.quantity, P.item_id, I.price, I.name FROM purchase P, item I WHERE P.customer_id={} AND P.item_id=I.item_id ORDER BY P.purchase_date DESC".format(
+        customer_id)
+    cursor.execute(query + ";")
 
-        context = {"items": dictfetchall(cursor), 'form': form, }
-        return render(request, 'customerOrder.html', context)
+    context = {"items": dictfetchall(cursor), 'form': form, }
+    return render(request, 'customerOrder.html', context)
 
 
 @login_required
