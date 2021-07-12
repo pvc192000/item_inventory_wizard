@@ -30,9 +30,8 @@
         <div class="card o-hidden border-0 shadow-lg my-5">
             <div class="card-body p-0">
                 <!-- Nested Row within Card Body -->
-                <div class="row">
-                    <div class="col-lg-5 d-none d-lg-block bg-register-image"></div>
-                    <div class="col-lg-7">
+                <div class="Center">
+                    <div class="Center">
                         <div class="p-5">
                             <div class="text-center">
                                 <h1 class="h4 text-gray-900 mb-4">Create an Account!</h1>
@@ -40,30 +39,38 @@
                             <form class="user" action="register" method="POST">
                                 {%csrf_token%}
                                 <div class="form-group row">
-                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                    <div class="col-sm-5 mb-3 mb-sm-0">
                                         <input type="text" class="form-control form-control-user" name="exampleFirstName"
                                             placeholder="First Name">
                                     </div>
-                                    <div class="col-sm-6">
+                                    <div class="col-sm-2 mb-3 mb-sm-0">
+                                        <input type="text" class="form-control form-control-user" name="exampleMiddleInitial"
+                                            placeholder="M.I">
+                                    </div>
+                                    <div class="col-sm-5">
                                         <input type="text" class="form-control form-control-user" name="exampleLastName"
                                             placeholder="Last Name">
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <input type="text" class="form-control form-control-user" name="exampleUserName"
-                                        placeholder="User Name">
-                                </div>
-                                <div class="form-group">
                                     <input type="email" class="form-control form-control-user" name="exampleInputEmail"
                                         placeholder="Email Address">
                                 </div>
-                                <div class="form-group">
-                                    <input type="text" class="form-control form-control-user" name="phone"
-                                        placeholder="Phone Number">
-                                </div>
-                                <div class="form-group">
-                                    <input type="text" class="form-control form-control-user" name="role"
-                                        placeholder="Enter your role: select from manager/staff/customer">
+                                <div class="form-group row">
+                                    <div class="col-sm-4 mb-3 mb-sm-0">
+                                        <label>Author</label>
+                                    </div>
+                                    <div class="col-sm-2 mb-3 mb-sm-0">
+                                        <input type="radio" class="form-control form-control-user" id="authorRole" value="authorRole"
+                                             name="role">
+                                    </div>
+                                    <div class="col-sm-4 mb-3 mb-sm-0">
+                                        <label>Reviewer</label>
+                                    </div>
+                                    <div class="col-sm-2 mb-3 mb-sm-0">
+                                        <input type="radio" class="form-control form-control-user" id="reviewerRole" value="reviewerRole"
+                                             name="role">
+                                    </div>
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">

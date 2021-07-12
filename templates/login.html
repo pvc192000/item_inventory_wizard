@@ -35,18 +35,18 @@
                 <div class="card o-hidden border-0 shadow-lg my-5">
                     <div class="card-body p-0">
                         <!-- Nested Row within Card Body -->
-                        <div class="row">
-                            <div class="col-lg-6 d-none d-lg-block bg-login-image"></div>
-                            <div class="col-lg-6">
+                        <div class="text-center">
+                            
+                            <div class="Center">
                                 <div class="p-5">
                                     <div class="text-center">
-                                        <h1 class="h4 text-gray-900 mb-4">Item Inventory Wizard</h1>
+                                        <h1 class="h4 text-gray-900 mb-4">CPMS</h1>
                                     </div>
                                     <form class="user" action="login" method="POST">
                                         {%csrf_token%}
                                         <div class="form-group">
-                                            <input type="text" class="form-control form-control-user"
-                                                name="exampleUserName" placeholder="Enter Username...">
+                                            <input type="email" class="form-control form-control-user"
+                                                name="exampleUserName" placeholder="Enter Username (email)...">
                                         </div>
                                         <div class="form-group">
                                             <input type="password" class="form-control form-control-user"
@@ -63,7 +63,9 @@
                                         <h3>{{message}}</h3>
                                         {% endfor %}
                                     </div>
-                                    
+                                    <div class="text-center">
+                                        <a class="small" href="forgotPassword">Forgot Password?</a>
+                                    </div>
                                     <div class="text-center">
                                         <a class="small" href="register">Create an Account!</a>
                                     </div>

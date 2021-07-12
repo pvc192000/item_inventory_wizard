@@ -74,15 +74,14 @@ WSGI_APPLICATION = 'item_inventory_wizard.wsgi.application'
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'item_inventory_wizard_db',
-        'USER': 'postgres',
-        'PASSWORD': '2000',
-        'HOST': 'localhost',
-        
-
-    }
+    "default": {
+        "ENGINE": "sql_server.pyodbc",
+        "NAME": "CPMS",
+        "HOST": "localhost",
+        "PORT": "",
+        "OPTIONS": {"driver": "ODBC Driver 17 for SQL Server", 
+        },
+    },
 }
 
 
@@ -127,3 +126,7 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR,  'static')
 ]
 STATIC_ROOT = os.path.join(BASE_DIR, 'assets')
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+MEDIA_URL = '/media/'
