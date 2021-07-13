@@ -40,20 +40,20 @@
                                 {%csrf_token%}
                                 <div class="form-group row">
                                     <div class="col-sm-5 mb-3 mb-sm-0">
-                                        <input type="text" class="form-control form-control-user" name="exampleFirstName"
+                                        <input required  type="text" class="form-control form-control-user" name="exampleFirstName"
                                             placeholder="First Name">
                                     </div>
                                     <div class="col-sm-2 mb-3 mb-sm-0">
-                                        <input type="text" class="form-control form-control-user" name="exampleMiddleInitial"
+                                        <input required  type="text" class="form-control form-control-user" name="exampleMiddleInitial"
                                             placeholder="M.I">
                                     </div>
                                     <div class="col-sm-5">
-                                        <input type="text" class="form-control form-control-user" name="exampleLastName"
+                                        <input required  type="text" class="form-control form-control-user" name="exampleLastName"
                                             placeholder="Last Name">
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <input type="email" class="form-control form-control-user" name="exampleInputEmail"
+                                    <input required  type="email" class="form-control form-control-user" name="exampleInputEmail"
                                         placeholder="Email Address">
                                 </div>
                                 <div class="form-group row">
@@ -61,29 +61,29 @@
                                         <label>Author</label>
                                     </div>
                                     <div class="col-sm-2 mb-3 mb-sm-0">
-                                        <input type="radio" class="form-control form-control-user" id="authorRole" value="authorRole"
+                                        <input required  type="radio" class="form-control form-control-user" id="authorRole" value="authorRole"
                                              name="role">
                                     </div>
                                     <div class="col-sm-4 mb-3 mb-sm-0">
                                         <label>Reviewer</label>
                                     </div>
                                     <div class="col-sm-2 mb-3 mb-sm-0">
-                                        <input type="radio" class="form-control form-control-user" id="reviewerRole" value="reviewerRole"
+                                        <input required  type="radio" class="form-control form-control-user" id="reviewerRole" value="reviewerRole"
                                              name="role">
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
-                                        <input type="password" class="form-control form-control-user"
+                                        <input required  type="password" class="form-control form-control-user"
                                         name="exampleInputPassword" placeholder="Password">
                                     </div>
                                     <div class="col-sm-6">
-                                        <input type="password" class="form-control form-control-user"
+                                        <input required  type="password" class="form-control form-control-user"
                                         name="exampleRepeatPassword" placeholder="Repeat Password">
                                     </div>
                                 </div>
                                 <div class="btn btn-primary btn-user btn-block">
-                                    <input type="submit" value="Register Account" class="btn btn-primary btn-user btn-block">
+                                    <input required  type="submit" value="Register Account" class="btn btn-primary btn-user btn-block">
                                 </div>
                                 <hr>
                             </form>

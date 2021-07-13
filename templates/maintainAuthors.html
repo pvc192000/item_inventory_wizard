@@ -58,21 +58,7 @@
                 Administrator options
             </div>
 
-            <!-- Nav Item - Pages Collapse Menu 
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
-                    aria-expanded="true" aria-controls="collapseTwo">
-                    <i class="fas fa-fw fa-cog"></i>
-                    <span>Components</span>
-                </a>
-                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Custom Components:</h6>
-                        <a class="collapse-item" href="buttons.html">Buttons</a>
-                        <a class="collapse-item" href="cards.html">Cards</a>
-                    </div>
-                </div>
-            </li>-->
+    
 
             <!-- Nav Item - Utilities Collapse Menu -->
             <li class="nav-item active">
@@ -293,54 +279,54 @@
                                                     {%csrf_token%}
                                                     <div class="form-group row">
                                                         <div class="col-sm-5 mb-3 mb-sm-0">
-                                                            <input type="text" class="form-control form-control-user" name="exampleFirstName"
+                                                            <input required  type="text" class="form-control form-control-user" name="exampleFirstName"
                                                                 placeholder="First Name">
                                                         </div>
                                                         <div class="col-sm-2 mb-3 mb-sm-0">
-                                                            <input type="text" class="form-control form-control-user" name="exampleMiddleInitial"
+                                                            <input required  type="text" class="form-control form-control-user" name="exampleMiddleInitial"
                                                                 placeholder="M.I">
                                                         </div>
                                                         <div class="col-sm-5">
-                                                            <input type="text" class="form-control form-control-user" name="exampleLastName"
+                                                            <input required  type="text" class="form-control form-control-user" name="exampleLastName"
                                                                 placeholder="Last Name">
                                                         </div>
                                                     </div>
                                                     <div class="form-group">
-                                                        <input type="email" class="form-control form-control-user" name="exampleInputEmail"
+                                                        <input required  type="email" class="form-control form-control-user" name="exampleInputEmail"
                                                             placeholder="Email Address">
                                                     </div>
                                                     <div class="form-group">
-                                                        <input type="text" class="form-control form-control-user" name="exampleAffiliation"
+                                                        <input required  type="text" class="form-control form-control-user" name="exampleAffiliation"
                                                             placeholder="Affiliation">
                                                     </div>
                                                     <div class="form-group">
-                                                        <input type="text" class="form-control form-control-user" name="exampleDepartment"
+                                                        <input required  type="text" class="form-control form-control-user" name="exampleDepartment"
                                                             placeholder="Department">
                                                     </div>
                                                     <div class="form-group">
-                                                        <input type="text" class="form-control form-control-user" name="exampleAddress"
+                                                        <input required  type="text" class="form-control form-control-user" name="exampleAddress"
                                                             placeholder="Address">
                                                     </div>
                                                     <div class="form-group row">
                                                         <div class="col-sm-5 mb-3 mb-sm-0">
-                                                            <input type="text" class="form-control form-control-user" name="exampleCity"
+                                                            <input required  type="text" class="form-control form-control-user" name="exampleCity"
                                                                 placeholder="City">
                                                         </div>
                                                         <div class="col-sm-2 mb-3 mb-sm-0">
-                                                            <input type="text" class="form-control form-control-user" name="exampleState"
+                                                            <input required  type="text" class="form-control form-control-user" name="exampleState"
                                                                 placeholder="State">
                                                         </div>
                                                         <div class="col-sm-5">
-                                                            <input type="text" class="form-control form-control-user" name="exampleZipCode"
+                                                            <input required  type="text" class="form-control form-control-user" name="exampleZipCode"
                                                                 placeholder="Zip Code">
                                                         </div>
                                                     </div>
                                                     <div class="form-group">
-                                                        <input type="text" class="form-control form-control-user" name="examplePhone"
+                                                        <input required  type="text" class="form-control form-control-user" name="examplePhone"
                                                             placeholder="Phone Number">
                                                     </div>
                                                     <div class="form-group">
-                                                        <input type="text" class="form-control form-control-user" name="examplePassword"
+                                                        <input required  type="text" class="form-control form-control-user" name="examplePassword"
                                                             placeholder="Password">
                                                     </div>
                                                     <div  class="btn btn-primary btn-user btn-block">
@@ -367,59 +353,59 @@
                                                 <form class="user" action="updateAuthors" method="POST">
                                                     {%csrf_token%}
                                                     <div class="form-group">
-                                                        <input type="number" class="form-control form-control-user" name="exampleAuthorID"
+                                                        <input required  type="number" class="form-control form-control-user" name="exampleAuthorID"
                                                             placeholder="Author ID">
                                                     </div>
                                                     <div class="form-group row">
                                                         <div class="col-sm-5 mb-3 mb-sm-0">
-                                                            <input type="text" class="form-control form-control-user" name="exampleFirstName"
+                                                            <input required  type="text" class="form-control form-control-user" name="exampleFirstName"
                                                                 placeholder="First Name">
                                                         </div>
                                                         <div class="col-sm-2 mb-3 mb-sm-0">
-                                                            <input type="text" class="form-control form-control-user" name="exampleMiddleInitial"
+                                                            <input required  type="text" class="form-control form-control-user" name="exampleMiddleInitial"
                                                                 placeholder="M.I">
                                                         </div>
                                                         <div class="col-sm-5">
-                                                            <input type="text" class="form-control form-control-user" name="exampleLastName"
+                                                            <input required  type="text" class="form-control form-control-user" name="exampleLastName"
                                                                 placeholder="Last Name">
                                                         </div>
                                                     </div>
                                                     <div class="form-group">
-                                                        <input type="email" class="form-control form-control-user" name="exampleInputEmail"
+                                                        <input required  type="email" class="form-control form-control-user" name="exampleInputEmail"
                                                             placeholder="Email Address">
                                                     </div>
                                                     <div class="form-group">
-                                                        <input type="text" class="form-control form-control-user" name="exampleAffiliation"
+                                                        <input required  type="text" class="form-control form-control-user" name="exampleAffiliation"
                                                             placeholder="Affiliation">
                                                     </div>
                                                     <div class="form-group">
-                                                        <input type="text" class="form-control form-control-user" name="exampleDepartment"
+                                                        <input required  type="text" class="form-control form-control-user" name="exampleDepartment"
                                                             placeholder="Department">
                                                     </div>
                                                     <div class="form-group">
-                                                        <input type="text" class="form-control form-control-user" name="exampleAddress"
+                                                        <input required  type="text" class="form-control form-control-user" name="exampleAddress"
                                                             placeholder="Address">
                                                     </div>
                                                     <div class="form-group row">
                                                         <div class="col-sm-5 mb-3 mb-sm-0">
-                                                            <input type="text" class="form-control form-control-user" name="exampleCity"
+                                                            <input required  type="text" class="form-control form-control-user" name="exampleCity"
                                                                 placeholder="City">
                                                         </div>
                                                         <div class="col-sm-2 mb-3 mb-sm-0">
-                                                            <input type="text" class="form-control form-control-user" name="exampleState"
+                                                            <input required  type="text" class="form-control form-control-user" name="exampleState"
                                                                 placeholder="State">
                                                         </div>
                                                         <div class="col-sm-5">
-                                                            <input type="text" class="form-control form-control-user" name="exampleZipCode"
+                                                            <input required  type="text" class="form-control form-control-user" name="exampleZipCode"
                                                                 placeholder="Zip Code">
                                                         </div>
                                                     </div>
                                                     <div class="form-group">
-                                                        <input type="text" class="form-control form-control-user" name="examplePhone"
+                                                        <input required  type="text" class="form-control form-control-user" name="examplePhone"
                                                             placeholder="Phone Number">
                                                     </div>
                                                     <div class="form-group">
-                                                        <input type="text" class="form-control form-control-user" name="examplePassword"
+                                                        <input required  type="text" class="form-control form-control-user" name="examplePassword"
                                                             placeholder="Password">
                                                     </div>
                                                     <div  class="btn btn-primary btn-user btn-block">
@@ -447,12 +433,12 @@
                                                 <form class="user" action="deleteAuthors" method="POST">
                                                     {%csrf_token%}
                                                     <div class="form-group">
-                                                        <input type="number" class="form-control form-control-user" name="exampleAuthorID"
+                                                        <input required  type="number" class="form-control form-control-user" name="exampleAuthorID"
                                                             placeholder="Author ID">
                                                     </div>
                                                     </div>
                                                     <div  class="btn btn-primary btn-user btn-block">
-                                                        <input type="submit" value='Delete Author' class="btn btn-primary btn-user btn-block">
+                                                        <input required  type="submit" value='Delete Author' class="btn btn-primary btn-user btn-block">
                                                     </div>
                                                     <hr>
                                                     

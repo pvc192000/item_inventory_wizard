@@ -8,6 +8,7 @@ from django.core.exceptions import PermissionDenied
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User, auth
 from django.core.files.storage import FileSystemStorage
+from CPMS.helper_functions import validateUserDetails, validateFilename
 
 # Implemention file for the Author View of the CPMS website. View function for each url call in the Author view is found here.
 
@@ -44,10 +45,13 @@ def authorModifyInfo(request):
         zipCode = request.POST['exampleZipCode']
         phone = request.POST['examplePhone']
         password = request.POST['examplePassword']
-
+        valid = validateUserDetails(state, zipCode, mIntial, phone, password)
+        if valid != True:
+                messages.error(request, valid)
+                return redirect('authorModifyInfo')
         if User.objects.filter(username=email).exists() and email != str(request.user.email):
             messages.error(request, 'email address already in use with a different account')
-            redirect('authorModifyInfo')
+            return redirect('authorModifyInfo')
         else:
             request.user.first_name = fname
             request.user.last_name = lname
@@ -80,7 +84,10 @@ def authorRegisterToSubmitPaper(request):
         state = request.POST['exampleState']
         zipCode = request.POST['exampleZipCode']
         phone = request.POST['examplePhone']
-
+        valid = validateUserDetails(state, zipCode, "a", phone)
+        if valid != True:
+            messages.error(request, valid)
+            return redirect('authorRegisterToSubmitPaper')
         cursor = connection.cursor()
         cursor.execute("UPDATE dbo.Author SET Affiliation = '{}', Department = '{}', Address = '{}', City = '{}', ZipCode = '{}', State = '{}', PhoneNumber = '{}' WHERE EmailAddress = '{}'".format
             (affiliation, department, address, city, zipCode, state, phone, str(request.user.email)))
@@ -106,6 +113,9 @@ def authorSubmitPaper(request):
             authorID = author['AuthorID']
         uploaded_file = request.FILES['exampleInputFile']
         filename = uploaded_file.name
+        if not validateFilename(filename):
+            messages.error(request, "Incorrect file type, please upload a pdf/doc/docx/txt file")
+            return redirect('authorSubmitPaper')
         fs = FileSystemStorage()
         filename = fs.save(uploaded_file.name, uploaded_file)
         fileUrl = fs.url(filename) #url to the file

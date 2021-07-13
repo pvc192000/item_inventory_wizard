@@ -228,15 +228,15 @@
                                                             </div>
                                                             
                                                             <div class="col-sm-2">
-                                                                <input type="radio" class="form-control form-control-user"
-                                                            id="examplePaperAcceptance" name="examplePaperAcceptance" value="1" > 
+                                                                <input required  type="radio" class="form-control form-control-user"
+                                                            id="examplePaperAcceptance" name="examplePaperAcceptance" value="1" required> 
                                                             </div>
                                                             <div class="col-sm-2">
                                                                 <a>OFF</a>
                                                             </div>
                                                             <div class="col-sm-2">
-                                                                <input type="radio" class="form-control form-control-user"
-                                                            id="examplePaperAcceptance" name="examplePaperAcceptance" value="0" > 
+                                                                <input required  type="radio" class="form-control form-control-user"
+                                                            id="examplePaperAcceptance" name="examplePaperAcceptance" value="0" required> 
                                                             </div>
                                                     </div>
                                                     <div class="form-group row">
@@ -248,20 +248,25 @@
                                                         </div>
                                                         
                                                         <div class="col-sm-2">
-                                                            <input type="radio" class="form-control form-control-user"
-                                                        id="exampleReviewAcceptance" name="exampleReviewAcceptance" value="1" > 
+                                                            <input required  type="radio" class="form-control form-control-user"
+                                                        id="exampleReviewAcceptance" name="exampleReviewAcceptance" value="1" required> 
                                                         </div>
                                                         <div class="col-sm-2">
                                                             <a>OFF</a>
                                                         </div>
                                                         <div class="col-sm-2">
-                                                            <input type="radio" class="form-control form-control-user"
-                                                        id="exampleReviewAcceptance" name="exampleReviewAcceptance" value="0" > 
+                                                            <input required  type="radio" class="form-control form-control-user"
+                                                        id="exampleReviewAcceptance" name="exampleReviewAcceptance" value="0" required> 
                                                         </div>
                                                     </div>
                                           
                                                 <div class="btn btn-primary btn-user btn-block">
                                                         <input type="submit" value="submit" class="btn btn-primary btn-user btn-block">       
+                                                </div>
+                                                <div class="text-center">
+                                                    {% for message in messages%}
+                                                    <h3>{{message}}</h3>
+                                                    {% endfor %}
                                                 </div>
                                                 </form>
                                                <hr>

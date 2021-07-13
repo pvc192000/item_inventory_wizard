@@ -1,3 +1,4 @@
+from CPMS.helper_functions import validateUserDetails
 from decimal import Context
 from django.shortcuts import render
 from django.shortcuts import render, redirect
@@ -57,10 +58,13 @@ def reviewerModifyInfo(request):
         phone = request.POST['examplePhone']
         otherType = request.POST['exampleOtherType'] 
         password = request.POST['examplePassword']
-
+        valid = validateUserDetails(state, zipCode, mIntial, phone, password)
+        if valid != True:
+            messages.error(request, valid)
+            return redirect('reviewerModifyInfo')
         if User.objects.filter(username=email).exists() and email != str(request.user.email):
             messages.error(request, 'email address already in use with a different account')
-            redirect('reviewerModifyInfo')
+            return redirect('reviewerModifyInfo')
         else:
             request.user.first_name = fname
             request.user.last_name = lname
@@ -179,6 +183,10 @@ def reviewerRegisterToReviewPapers(request):
         zipCode = request.POST['exampleZipCode']
         phone = request.POST['examplePhone']
         otherType = request.POST['exampleOtherType'] 
+        valid = validateUserDetails(state, zipCode, "a", phone)
+        if valid != True:
+            messages.error(request, valid)
+            return redirect('reviewerRegisterToReviewPapers')
         cursor = connection.cursor()
         cursor.execute("""UPDATE dbo.Reviewer
    SET Active = '{}'

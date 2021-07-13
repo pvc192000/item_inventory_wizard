@@ -1,3 +1,4 @@
+from CPMS.helper_functions import validateUserDetails, validateFilename
 from decimal import Context
 from typing import Coroutine
 from django import contrib
@@ -44,7 +45,7 @@ def insertAuthors(request):
     fname = request.POST["exampleFirstName"]
     lname = request.POST['exampleLastName']
     mIntial = request.POST['exampleMiddleInitial']
-    email = request.POST['exmapleInputEmail']
+    email = request.POST['exampleInputEmail']
     address = request.POST['exampleAddress']
     affiliation = request.POST['exampleAffiliation']
     department = request.POST['exampleDepartment']
@@ -53,10 +54,15 @@ def insertAuthors(request):
     zipCode = request.POST['exampleZipCode']
     phone = request.POST['examplePhone']
     password = request.POST['examplePassword']
+    
+    valid = validateUserDetails(state, zipCode, mIntial, phone, password)
+    if valid != True:
+        messages.error(request, valid)
+        return redirect('maintainAuthors')
 
     if User.objects.filter(username=email).exists():
         messages.error(request, 'email address already in use with a different account')
-        redirect('maintainAuthors')
+        return redirect('maintainAuthors')
     else:
         user = User.objects.create_user(username=email, password=password, email=email, first_name=fname, last_name=lname)
     cursor = connection.cursor()
@@ -85,7 +91,7 @@ def updateAuthors(request):
     fname = request.POST["exampleFirstName"]
     lname = request.POST['exampleLastName']
     mIntial = request.POST['exampleMiddleInitial']
-    email = request.POST['exmapleInputEmail']
+    email = request.POST['exampleInputEmail']
     address = request.POST['exampleAddress']
     affiliation = request.POST['exampleAffiliation']
     department = request.POST['exampleDepartment']
@@ -95,14 +101,17 @@ def updateAuthors(request):
     phone = request.POST['examplePhone']
     ID = request.POST['exampleAuthorID']
     password = request.POST['examplePassword']
-
+    valid = validateUserDetails(state, zipCode, mIntial, phone, password)
+    if valid != True:
+        messages.error(request, valid)
+        return redirect('maintainAuthors')
     cursor = connection.cursor()
     cursor.execute("SELECT EmailAddress FROM dbo.Author WHERE AuthorID = '{}'".format(ID))
     authors = dictfetchall(cursor)
     updateUser = User.objects.filter(username=authors[0].EmailAddress)
     if User.objects.filter(username=email).exists() and email != authors[0].EmailAddress:
         messages.error(request, 'email address already in use with a different account')
-        redirect('maintainAuthors')
+        return redirect('maintainAuthors')
     else:
         updateUser.user.first_name = fname
         updateUser.user.last_name = lname
@@ -135,6 +144,9 @@ def insertPapers(request):
         raise PermissionDenied
     uploaded_file = request.FILES['exampleInputFile']
     filename = uploaded_file.name
+    if not validateFilename(filename):
+            messages.error(request, "Incorrect file type, please upload a pdf/doc/docx/txt file")
+            return redirect('authorSubmitPaper')
     fs = FileSystemStorage()
     filename = fs.save(uploaded_file.name, uploaded_file)
     authorID = request.POST['exampleAuthorID']
@@ -157,7 +169,7 @@ def insertPapers(request):
            ,Curriculum
            ,DataStructures
            ,Databases
-           ,DistanceLearning
+           ,DistancedLearning
            ,DistributedSystems
            ,EthicalSocietalIssues
            ,FirstYearComputing
@@ -173,7 +185,7 @@ def insertPapers(request):
            ,NonMajorCourses
            ,ObjectOrientedIssues
            ,OperatingSystems
-           ,ParallelsProcessing
+           ,ParallelProcessing
            ,Pedagogy
            ,ProgrammingLanguages
            ,Research
@@ -237,8 +249,12 @@ def updatePapers(request):
     if not request.user.is_superuser:
         raise PermissionDenied
     authorID = request.POST['exampleAuthorID']
+    paperID = request.POST['examplePaperID']
     uploaded_file = request.FILES['exampleInputFile']
     filename = uploaded_file.name
+    if not validateFilename(filename):
+            messages.error(request, "Incorrect file type, please upload a pdf/doc/docx/txt file")
+            return redirect('authorSubmitPaper')
     fs = FileSystemStorage()
     filename = fs.save(uploaded_file.name, uploaded_file)
     title = request.POST['examplePaperTitle']
@@ -288,7 +304,7 @@ def updatePapers(request):
       ,Other = '{}'
       ,OtherDescription = '{}'
       ,ReviewsAcknowledged = '{}'
-    WHERE EmailAddress = '{}' """.format(authorID, True, filename, filename, title, "", "",
+    WHERE PaperID = '{}' """.format(authorID, True, filename, filename, title, "", "",
         True if request.POST.__contains__('analysisOfAlgorithms') else False
            , True if request.POST.__contains__('applications') else False
            , True if request.POST.__contains__('architecture') else False
@@ -325,7 +341,7 @@ def updatePapers(request):
            , True if request.POST.__contains__('other') else False
            , otherType
            , False
-           , str(request.user.email)))
+           , paperID))
     messages.info(request, 'Paper updated')
     return redirect('maintainPapers')
 
@@ -358,7 +374,7 @@ def insertReviewers(request):
     fname = request.POST["exampleFirstName"]
     lname = request.POST['exampleLastName']
     mIntial = request.POST['exampleMiddleInitial']
-    email = request.POST['exmapleInputEmail']
+    email = request.POST['exampleInputEmail']
     address = request.POST['exampleAddress']
     affiliation = request.POST['exampleAffiliation']
     department = request.POST['exampleDepartment']
@@ -367,10 +383,14 @@ def insertReviewers(request):
     zipCode = request.POST['exampleZipCode']
     phone = request.POST['examplePhone']
     otherType = request.POST['exampleOtherType']
-    password = request.POST['examplePassword']    
+    password = request.POST['examplePassword']
+    valid = validateUserDetails(state, zipCode, mIntial, phone, password)
+    if valid != True:
+        messages.error(request, valid)
+        return redirect('maintainReviewers')    
     if User.objects.filter(username=email).exists():
         messages.error(request, 'email address already in use with a different account')
-        redirect('maintainReviewers')
+        return redirect('maintainReviewers')
     else:
         user = User.objects.create_user(username=email, password=password, email=email, first_name=fname, last_name=lname)
     cursor = connection.cursor()
@@ -379,6 +399,7 @@ def insertReviewers(request):
            ,FirstName
            ,LastName
            ,MiddleInitial
+           ,EmailAddress
            ,Affiliation
            ,Department
            ,Address
@@ -395,7 +416,7 @@ def insertReviewers(request):
            ,Curriculum
            ,DataStructures
            ,Databases
-           ,DistanceLearning
+           ,DistancedLearning
            ,DistributedSystems
            ,EthicalSocietalIssues
            ,FirstYearComputing
@@ -411,7 +432,7 @@ def insertReviewers(request):
            ,NonMajorCourses
            ,ObjectOrientedIssues
            ,OperatingSystems
-           ,ParallelsProcessing
+           ,ParallelProcessing
            ,Pedagogy
            ,ProgrammingLanguages
            ,Research
@@ -424,8 +445,9 @@ def insertReviewers(request):
            ,OtherDescription
            ,ReviewsAcknowledged) 
            VALUES 
-           ('{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}'
-           '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}')""".format(
+           ('{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}'
+           , '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}'
+           , '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}')""".format(
            True, fname, lname, mIntial, email, affiliation, department, address, city, state, zipCode, phone, password
            , True if request.POST.__contains__('analysisOfAlgorithms') else False
            , True if request.POST.__contains__('applications') else False
@@ -474,7 +496,7 @@ def updateReviewers(request):
     fname = request.POST["exampleFirstName"]
     lname = request.POST['exampleLastName']
     mIntial = request.POST['exampleMiddleInitial']
-    email = request.POST['exmapleInputEmail']
+    email = request.POST['exampleInputEmail']
     address = request.POST['exampleAddress']
     affiliation = request.POST['exampleAffiliation']
     department = request.POST['exampleDepartment']
@@ -489,9 +511,13 @@ def updateReviewers(request):
     cursor.execute("SELECT EmailAddress FROM dbo.Reviewer WHERE AuthorID = '{}'".format(reviewerID))
     reviewers = dictfetchall(cursor)
     updateUser = User.objects.filter(username=reviewers[0].EmailAddress)
+    valid = validateUserDetails(state, zipCode, mIntial, phone, password)
+    if valid != True:
+        messages.error(request, valid)
+        return redirect('maintainReviewers')
     if User.objects.filter(username=email).exists() and email != reviewers[0].EmailAddress:
         messages.error(request, 'email address already in use with a different account')
-        redirect('maintainReviewers')
+        return redirect('maintainReviewers')
     else:
         updateUser.user.first_name = fname
         updateUser.user.last_name = lname
@@ -753,11 +779,15 @@ def managePaperReviewAcceptance(request):
     if not request.user.is_superuser:
         raise PermissionDenied
     if request.method == 'POST':
-        reviewA = request.POST['exampleReviewAcceptance']
-        paperA = request.POST['examplePaperAcceptance']
-        cursor = connection.cursor()
-        cursor.execute("UPDATE dbo.Defaults SET EnabledReviewers = '{}', EnabledAuthors = '{}'".format(int(reviewA), int(paperA)))
-        messages.info(request, 'Acceptance Updated')
+        try:
+            reviewA = request.POST['exampleReviewAcceptance']
+            paperA = request.POST['examplePaperAcceptance']
+            cursor = connection.cursor()
+            cursor.execute("UPDATE dbo.Defaults SET EnabledReviewers = '{}', EnabledAuthors = '{}'".format(int(reviewA), int(paperA)))
+            messages.info(request, 'Acceptance Updated')
+        except:
+            messages.error(request, 'An error occured while processing the form data, please redo the form correctly')
+
         return redirect('managePaperReviewAcceptance')
     else:
         cursor = connection.cursor()

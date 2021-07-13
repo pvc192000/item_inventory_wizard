@@ -253,22 +253,26 @@
                                                 </div>
                                                 <form class="user" action="insertPapers" method="POST" enctype="multipart/form-data">
                                                     {%csrf_token%}
+                                                    <div class="form-group">
+                                                        <input required  type="number" class="form-control form-control-user" name="exampleAuthorID"
+                                                            placeholder="Author ID">
+                                                    </div>
                                                     <div class="form-group row">
                                                         <div class="col-sm-5 mb-3 mb-sm-0">
-                                                            <input type="text" class="form-control form-control-user" name="exampleFirstName"
+                                                            <input required  type="text" class="form-control form-control-user" name="exampleFirstName"
                                                                 placeholder="First Name">
                                                         </div>
                                                         <div class="col-sm-2 mb-3 mb-sm-0">
-                                                            <input type="text" class="form-control form-control-user" name="exampleMiddleInitial"
+                                                            <input required  type="text" class="form-control form-control-user" name="exampleMiddleInitial"
                                                                 placeholder="M.I">
                                                         </div>
                                                         <div class="col-sm-5">
-                                                            <input type="text" class="form-control form-control-user" name="exampleLastName"
+                                                            <input required  type="text" class="form-control form-control-user" name="exampleLastName"
                                                                 placeholder="Last Name">
                                                         </div>
                                                     </div>
                                                     <div class="form-group">
-                                                        <input type="text" class="form-control form-control-user" name="examplePaperTitle"
+                                                        <input required  type="text" class="form-control form-control-user" name="examplePaperTitle"
                                                             placeholder="Paper Title">
                                                     </div>
                                                     <div class="form-group row">
@@ -536,7 +540,7 @@
                                                         <a>Upload your file here:</a>
                                                     </div>
                                                     <div class="form-group">
-                                                        <input type="file" class="form-control form-control-user" name="exampleInputFile"
+                                                        <input required  type="file" class="form-control form-control-user" name="exampleInputFile"
                                                             placeholder="Upload your file here">
                                                     </div>
                                                     <div  class="btn btn-primary btn-user btn-block">
@@ -561,22 +565,30 @@
                                                 </div>
                                                 <form class="user" action="updateAuthors" method="POST" enctype="multipart/form-data">
                                                     {%csrf_token%}
+                                                    <div class="form-group">
+                                                        <input required  type="number" class="form-control form-control-user" name="examplePaperID"
+                                                            placeholder="Paper ID">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <input required  type="number" class="form-control form-control-user" name="exampleAuthorID"
+                                                            placeholder="Author ID">
+                                                    </div>
                                                     <div class="form-group row">
                                                         <div class="col-sm-5 mb-3 mb-sm-0">
-                                                            <input type="text" class="form-control form-control-user" name="exampleFirstName"
+                                                            <input required  type="text" class="form-control form-control-user" name="exampleFirstName"
                                                                 placeholder="First Name">
                                                         </div>
                                                         <div class="col-sm-2 mb-3 mb-sm-0">
-                                                            <input type="text" class="form-control form-control-user" name="exampleMiddleInitial"
+                                                            <input required  type="text" class="form-control form-control-user" name="exampleMiddleInitial"
                                                                 placeholder="M.I">
                                                         </div>
                                                         <div class="col-sm-5">
-                                                            <input type="text" class="form-control form-control-user" name="exampleLastName"
+                                                            <input required  type="text" class="form-control form-control-user" name="exampleLastName"
                                                                 placeholder="Last Name">
                                                         </div>
                                                     </div>
                                                     <div class="form-group">
-                                                        <input type="text" class="form-control form-control-user" name="examplePaperTitle"
+                                                        <input required  type="text" class="form-control form-control-user" name="examplePaperTitle"
                                                             placeholder="Paper Title">
                                                     </div>
                                                     <div class="form-group row">
@@ -844,7 +856,7 @@
                                                         <a>Upload your file here:</a>
                                                     </div>
                                                     <div class="form-group">
-                                                        <input type="file" class="form-control form-control-user" name="exampleInputFile"
+                                                        <input required  type="file" class="form-control form-control-user" name="exampleInputFile"
                                                             placeholder="Upload your file here">
                                                     </div>
                                                     <div  class="btn btn-primary btn-user btn-block">
@@ -871,13 +883,13 @@
                                                 <form class="user" action="deletePapers" method="POST">
                                                     {%csrf_token%}
                                                     <div class="form-group">
-                                                        <input type="number" class="form-control form-control-user" id="exampleInputEmail"
-                                                            placeholder="Author ID">
+                                                        <input required  type="number" class="form-control form-control-user" name="examplePaperID"
+                                                            placeholder="Paper ID">
                                                     </div>
                                                     </div>
-                                                    <a href="login.html" class="btn btn-primary btn-user btn-block">
-                                                        Delete Author
-                                                    </a>
+                                                    <div  class="btn btn-primary btn-user btn-block">
+                                                        <input type="submit" value='Delete Paper' class="btn btn-primary btn-user btn-block">
+                                                    </div>
                                                     <hr>
                                                 </form>
                                                 <hr>

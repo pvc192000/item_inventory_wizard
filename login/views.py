@@ -3,6 +3,7 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.models import User, auth 
 from django.db import connection
+from CPMS.helper_functions import validateMiddleInitial, validatePassword
 
 # Implemention file for the Login Model of the CPMS website. View function for each url call in the Login model is found here.
 
@@ -37,7 +38,11 @@ def register(request):
         password1 = request.POST['exampleInputPassword']
         password2 = request.POST['exampleRepeatPassword']
         role = request.POST['role']
-        print(role)
+        if not validatePassword(password1):
+            messages.error(request, "Invalid Password, password should be 5 characters long")
+            return redirect('register')
+        if not validateMiddleInitial(middle_initial):
+            messages.error(request, "Invalid Middle Initial, middle initial should one character long")
 
         if password1 == password2:
             if User.objects.filter(username=user_name).exists():
