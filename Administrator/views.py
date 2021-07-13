@@ -67,7 +67,7 @@ def insertAuthors(request):
         user = User.objects.create_user(username=email, password=password, email=email, first_name=fname, last_name=lname)
     cursor = connection.cursor()
     cursor.execute("""INSERT INTO dbo.Author (FirstName, LastName, MiddleInitial, Password, EmailAddress, Address, Affiliation, Department, City
-    , State, ZipCode, PhoneNumber) VALUES ('{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}'}""".format(fname, lname
+    , State, ZipCode, PhoneNumber) VALUES ('{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}')""".format(fname, lname
     , mIntial, password, email, address, affiliation, department, city, state, zipCode, phone))
     messages.info(request, 'Author Created')
     return redirect('maintainAuthors')

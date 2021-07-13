@@ -1,3 +1,4 @@
+#This file contains helper fucntions for input validation
 STATES = {"AL","AK","AS","AZ","AR","CA","CO","CT","DE","DC","FL","GA","GU","HI","ID","IL","IN","IA","KS","KY","LA",
 "ME","MD","MA","MI","MN","MS","MO","MT","NE","NV","NH","NJ","NM","NY","NC","ND","MP","OH","OK","OR","PA","PR","RI",
 "SC","SD","TN","TX","UT","VT","VA","VI","WA","WV","WI","WY"}
@@ -11,7 +12,7 @@ def validateStateCode(state):
 def validateZipCode(zip):
     digits = 0
     for i in zip:
-        if zip[i].isnumeric():
+        if i.isnumeric():
             digits += 1
     if len(zip) == 5 and digits == 5:
         return True
@@ -27,7 +28,7 @@ def validateMiddleInitial(mi):
 def validatePhone(phone):
     digits = 0
     for i in phone:
-        if phone[i].isnumeric():
+        if i.isnumeric():
             digits += 1
     if digits == 10:
         return True

@@ -240,20 +240,22 @@
                                         </tr>
                                     </tfoot>
                                     <tbody>
+                                        {%for author in authors%}
                                         <tr>
-                                            <td>1</td>
-                                            <td>Chokshi</td>
-                                            <td>Param</td>
-                                            <td>V</td>
-                                            <td>University of South Florida</td>
-                                            <td>Computer Science and Engineering</td>
-                                            <td>221B Bakers street</td>
-                                            <td>Tampa</td>
-                                            <td>Florida</td>
-                                            <td>33620</td>
-                                            <td>123 456 2000</td>
-                                            <td>sholmes@usf.edu</td>
+                                            <th>{{author.AuthorID}}</th>
+                                            <th>{{author.LastName}}</th>
+                                            <th>{{author.FirstName}}</th>
+                                            <th>{{author.MiddleInitial}}</th>
+                                            <th>{{author.Affiliation}}</th>
+                                            <th>{{author.Department}}</th>
+                                            <th>{{author.Address}}</th>
+                                            <th>{{author.City}}</th>
+                                            <th>{{author.State}}</th>
+                                            <th>{{author.ZipCode}}</th>
+                                            <th>{{author.PhoneNumber}}</th>
+                                            <th>{{author.EmailAddress}}</th>
                                         </tr>
+                                        {%endfor%}
                                         
                                     </tbody>
                                 </table>
