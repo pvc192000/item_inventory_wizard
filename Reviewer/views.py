@@ -183,7 +183,7 @@ def reviewerRegisterToReviewPapers(request):
         zipCode = request.POST['exampleZipCode']
         phone = request.POST['examplePhone']
         otherType = request.POST['exampleOtherType'] 
-        valid = validateUserDetails(state, zipCode, "a", phone)
+        valid = validateUserDetails(state, zipCode, "a", phone, '0')
         if valid != True:
             messages.error(request, valid)
             return redirect('reviewerRegisterToReviewPapers')

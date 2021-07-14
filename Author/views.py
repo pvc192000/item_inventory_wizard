@@ -84,7 +84,7 @@ def authorRegisterToSubmitPaper(request):
         state = request.POST['exampleState']
         zipCode = request.POST['exampleZipCode']
         phone = request.POST['examplePhone']
-        valid = validateUserDetails(state, zipCode, "a", phone)
+        valid = validateUserDetails(state, zipCode, "a", phone, '0')
         if valid != True:
             messages.error(request, valid)
             return redirect('authorRegisterToSubmitPaper')
