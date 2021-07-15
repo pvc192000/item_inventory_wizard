@@ -260,14 +260,17 @@
                                     </tbody>
                                 </table>
                             </div>
-                            <div class="text-center">
-                                {% for message in messages%}
-                                <h3>{{message}}</h3>
-                                {% endfor %}
-                            </div>
+                            
                         </div>
                     </div>
-
+                    
+                    {% for message in messages%}
+                    <div class="card shadow mb-4">
+                        <div class="text-center">
+                            <h3>{{message}}</h3>
+                        </div>         
+                    </div>
+                    {% endfor %}
                             <div class="card o-hidden border-0 shadow-lg my-5">
                                 <div class="card-body p-0">
                                     <!-- Nested Row within Card Body -->

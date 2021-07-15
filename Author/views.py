@@ -62,8 +62,10 @@ def authorModifyInfo(request):
             auth.login(request, request.user)
             
         cursor = connection.cursor()
+
         cursor.execute("UPDATE dbo.Author SET FirstName = '{}', LastName = '{}', MiddleInitial = '{}', Affiliation = '{}', Department = '{}', Address = '{}', City = '{}', ZipCode = '{}', State = '{}', PhoneNumber = '{}', EmailAddress = '{}', Password = '{}' WHERE EmailAddress = '{}'".format
-            (fname, lname, mIntial, affiliation, department, address, city, zipCode, state, phone, email, password, str(request.user.email)))
+                (fname, lname, mIntial, affiliation, department, address, city, zipCode, state, phone, email, password, str(request.user.email)))
+    
         messages.info(request,'Information Updated')  
         return redirect('authorModifyInfo')
     else:

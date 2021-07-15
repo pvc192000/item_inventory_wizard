@@ -346,5 +346,7 @@ def reviewerReviewPapers(request):
         Context = {'papers': dictfetchall(cursor)}
         cursor.execute("SELECT EnabledReviewers FROM dbo.Defaults")
         Context['Defaults'] = (dictfetchall(cursor))[0]
+        cursor.execute("SELECT FirstName, LastName, MiddleInitial, Affiliation FROM dbo.Reviewer WHERE EmailAddress = '{}'".format(str(request.user.email)))
+        Context['reviewers']= (dictfetchall(cursor))[0]['Affiliation']
         return render(request, 'reviewerReviewPapers.html', Context)
 

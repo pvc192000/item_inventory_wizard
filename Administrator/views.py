@@ -79,7 +79,7 @@ def deleteAuthors(request):
         raise PermissionDenied
     ID = request.POST['exampleAuthorID']
     cursor = connection.cursor()
-    cursor.execute("DELETE FROM dbo.Author as a WHERE a.AuthorID = '{}' ".format(ID))
+    cursor.execute("DELETE FROM dbo.Author  WHERE AuthorID = '{}' ".format(ID))
     messages.info(request, 'Author Deleted')
     return redirect('maintainAuthors')
 
@@ -108,17 +108,17 @@ def updateAuthors(request):
     cursor = connection.cursor()
     cursor.execute("SELECT EmailAddress FROM dbo.Author WHERE AuthorID = '{}'".format(ID))
     authors = dictfetchall(cursor)
-    updateUser = User.objects.filter(username=authors[0].EmailAddress)
+    updateUser = User.objects.get(username=authors[0].EmailAddress)
     if User.objects.filter(username=email).exists() and email != authors[0].EmailAddress:
         messages.error(request, 'email address already in use with a different account')
         return redirect('maintainAuthors')
     else:
-        updateUser.user.first_name = fname
-        updateUser.user.last_name = lname
-        updateUser.user.email = email
-        updateUser.user.set_password(password)
-        updateUser.user.username = email
-        updateUser.user.save()
+        updateUser.first_name = fname
+        updateUser.last_name = lname
+        updateUser.email = email
+        updateUser.set_password(password)
+        updateUser.username = email
+        updateUser.save()
      
     cursor = connection.cursor()
     cursor.execute("UPDATE dbo.Author SET FirstName = '{}', LastName = '{}', MiddleInitial = '{}', Affiliation = '{}', Department = '{}', Address = '{}', City = '{}', ZipCode = '{}', State = '{}', PhoneNumber = '{}', EmailAddress = '{}', Password = '{}' WHERE AuthorID = '{}'".format
@@ -146,7 +146,7 @@ def insertPapers(request):
     filename = uploaded_file.name
     if not validateFilename(filename):
             messages.error(request, "Incorrect file type, please upload a pdf/doc/docx/txt file")
-            return redirect('authorSubmitPaper')
+            return redirect('insertPapers')
     fs = FileSystemStorage()
     filename = fs.save(uploaded_file.name, uploaded_file)
     authorID = request.POST['exampleAuthorID']
@@ -169,7 +169,7 @@ def insertPapers(request):
            ,Curriculum
            ,DataStructures
            ,Databases
-           ,DistancedLearning
+           ,DistanceLearning
            ,DistributedSystems
            ,EthicalSocietalIssues
            ,FirstYearComputing
@@ -185,7 +185,7 @@ def insertPapers(request):
            ,NonMajorCourses
            ,ObjectOrientedIssues
            ,OperatingSystems
-           ,ParallelProcessing
+           ,ParallelsProcessing
            ,Pedagogy
            ,ProgrammingLanguages
            ,Research
@@ -254,7 +254,7 @@ def updatePapers(request):
     filename = uploaded_file.name
     if not validateFilename(filename):
             messages.error(request, "Incorrect file type, please upload a pdf/doc/docx/txt file")
-            return redirect('authorSubmitPaper')
+            return redirect('updatePapers')
     fs = FileSystemStorage()
     filename = fs.save(uploaded_file.name, uploaded_file)
     title = request.POST['examplePaperTitle']
@@ -276,7 +276,7 @@ def updatePapers(request):
       ,Curriculum = '{}'
       ,DataStructures = '{}'
       ,Databases = '{}'
-      ,DistancedLearning = '{}'
+      ,DistanceLearning = '{}'
       ,DistributedSystems = '{}'
       ,EthicalSocietalIssues = '{}'
       ,FirstYearComputing = '{}'
@@ -292,7 +292,7 @@ def updatePapers(request):
       ,NonMajorCourses = '{}'
       ,ObjectOrientedIssues = '{}'
       ,OperatingSystems = '{}'
-      ,ParallelProcessing = '{}'
+      ,ParallelsProcessing = '{}'
       ,Pedagogy = '{}'
       ,ProgrammingLanguages = '{}'
       ,Research = '{}'
@@ -303,7 +303,6 @@ def updatePapers(request):
       ,WebAndInternetProgramming = '{}'
       ,Other = '{}'
       ,OtherDescription = '{}'
-      ,ReviewsAcknowledged = '{}'
     WHERE PaperID = '{}' """.format(authorID, True, filename, filename, title, "", "",
         True if request.POST.__contains__('analysisOfAlgorithms') else False
            , True if request.POST.__contains__('applications') else False
@@ -340,7 +339,6 @@ def updatePapers(request):
            , True if request.POST.__contains__('webAndInternetProgramming') else False
            , True if request.POST.__contains__('other') else False
            , otherType
-           , False
            , paperID))
     messages.info(request, 'Paper updated')
     return redirect('maintainPapers')
@@ -508,9 +506,9 @@ def updateReviewers(request):
     reviewerID = request.POST['exampleReviewerID']
     password = request.POST['examplePassword']
     cursor = connection.cursor()
-    cursor.execute("SELECT EmailAddress FROM dbo.Reviewer WHERE AuthorID = '{}'".format(reviewerID))
+    cursor.execute("SELECT EmailAddress FROM dbo.Reviewer WHERE ReviewerID = '{}'".format(reviewerID))
     reviewers = dictfetchall(cursor)
-    updateUser = User.objects.filter(username=reviewers[0].EmailAddress)
+    updateUser = User.objects.get(username=reviewers[0]['EmailAddress'])
     valid = validateUserDetails(state, zipCode, mIntial, phone, password)
     if valid != True:
         messages.error(request, valid)
@@ -519,12 +517,12 @@ def updateReviewers(request):
         messages.error(request, 'email address already in use with a different account')
         return redirect('maintainReviewers')
     else:
-        updateUser.user.first_name = fname
-        updateUser.user.last_name = lname
-        updateUser.user.email = email
-        updateUser.user.set_password(password)
-        updateUser.user.username = email
-        updateUser.user.save()
+        updateUser.first_name = fname
+        updateUser.last_name = lname
+        updateUser.email = email
+        updateUser.set_password(password)
+        updateUser.username = email
+        updateUser.save()
         
     cursor = connection.cursor()
     cursor.execute("""UPDATE dbo.Reviewer
@@ -540,7 +538,7 @@ def updateReviewers(request):
       ,State = '{}'
       ,ZipCode = '{}'
       ,PhoneNumber = '{}'
-      .Password = '{}'
+      ,Password = '{}'
       ,AnalysisOfAlgorithms = '{}'
       ,Applications = '{}'
       ,Architecture = '{}'
@@ -678,7 +676,7 @@ def insertReviews(request):
            ,ComfortLevelAcceptability
            ,Complete)
      VALUES
-           ('{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}' })
+           ('{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}' )
     """.format(
         paperID, reviewerID
       ,int(request.POST['AppropriatenessOfTopic'])

@@ -205,7 +205,7 @@
                                         <tr>
                                             <th>Reviewer ID</th>
                                             <th>First Name</th>
-                                            <th>Middle Inital</th>
+                                            <th>Middle Initial</th>
                                             <th>Last Name</th> 
                                             <th>Affiliation</th>
                                             <th>Interests</th>
@@ -216,7 +216,7 @@
                                         <tr>
                                             <th>Reviewer ID</th>
                                             <th>First Name</th>
-                                            <th>Middle Inital</th>
+                                            <th>Middle Initial</th>
                                             <th>Last Name</th> 
                                             <th>Affiliation</th>
                                             <th>Interests</th>
@@ -228,12 +228,12 @@
                                         <tr>
                                             <th>{{reviewer.ReviewerID}}</th>
                                             <th>{{reviewer.FirstName}}</th>
-                                            <th>{{reviewer.MiddleInital}}</th>
+                                            <th>{{reviewer.MiddleInitial}}</th>
                                             <th>{{reviewer.LastName}}</th> 
                                             <th>{{reviewer.Affiliation}}</th>
                                             <th>{%for key, value in reviewer.items%}
                                                 
-                                                {%if value == 1 and key != 'ReviewerID' and key != 'ReviewsAcknowledged'%}
+                                                {%if value == 1 and key != 'ReviewerID' and key != 'ReviewsAcknowledged' and key != 'Active'%}
                                                 {{key}}, 
                                                 {%endif%}
                                                 {%endfor%}</th>
@@ -243,13 +243,16 @@
                                     </tbody>
                                 </table>
                             </div>
-                            <div class="text-center">
-                                {% for message in messages%}
-                                <h3>{{message}}</h3>
-                                {% endfor %}
-                            </div>
+                            
                         </div>
                     </div>
+                    {% for message in messages%}
+                    <div class="card shadow mb-4">
+                        <div class="text-center">
+                            <h3>{{message}}</h3>
+                        </div>         
+                    </div>
+                    {% endfor %}
                             <div class="card o-hidden border-0 shadow-lg my-5">
                                 <div class="card-body p-0">
                                     <!-- Nested Row within Card Body -->
@@ -920,7 +923,7 @@
                                                     </div>
                                                        
                                                     <div  class="btn btn-primary btn-user btn-block">
-                                                        <input type="submit" value='Reviewer Updated' class="btn btn-primary btn-user btn-block">
+                                                        <input type="submit" value='Update Reviewer' class="btn btn-primary btn-user btn-block">
                                                     </div>
                                                     <hr>
                                                 </form>

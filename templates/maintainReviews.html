@@ -205,18 +205,22 @@
                                     <thead>
                                         <tr>
                                             {%for review in reviews%}
+                                           
                                             {%for key, value in review.items%}
                                             <th>{{key}}</th>
                                             {%endfor%}
+                                          
                                             {%endfor%}
                                         </tr>
                                     </thead>
                                     <tfoot>
                                         <tr>
                                             {%for review in reviews%}
+                                            
                                             {%for key, value in review.items%}
                                             <th>{{key}}</th>
                                             {%endfor%}
+                                           
                                             {%endfor%}
                                         </tr>
                                     </tfoot>
@@ -233,14 +237,16 @@
                                     </tbody>
                                 </table>
                             </div>
-                            <div class="text-center">
-                                {% for message in messages%}
-                                <h3>{{message}}</h3>
-                                {% endfor %}
-                            </div>
+                            
                         </div>
                     </div>
-                    
+                    {% for message in messages%}
+                    <div class="card shadow mb-4">
+                        <div class="text-center">
+                            <h3>{{message}}</h3>
+                        </div>         
+                    </div>
+                    {% endfor %}
                             <div class="card o-hidden border-0 shadow-lg my-5">
                                 <div class="card-body p-0">
                                     <!-- Nested Row within Card Body -->
@@ -593,42 +599,42 @@
                                                     </div>
                                                     <div class="form-group row">
                                                         <div class="col-sm-2 mb-3 mb-sm-0">
-                                                            <a>ClarityOfTheMainMessage:</a>
+                                                            <a>ClarityOfMainMessage:</a>
                                                         </div>
                                                         <div class="col-sm-1 mb-3 mb-sm-0">
                                                             <a>Poor</a>
                                                         </div>
                                                         <div class="col-sm-1 mb-3 mb-sm-0">
                                                             <input required  type="radio" class="form-control form-control-user" id="exampleMiddleInitial"
-                                                                name="ClarityOfTheMainMessage" value='1'>
+                                                                name="ClarityOfMainMessage" value='1'>
                                                         </div>
                                                         <div class="col-sm-1 mb-3 mb-sm-0">
                                                             <a>Fair</a>
                                                         </div>
                                                         <div class="col-sm-1 mb-3 mb-sm-0">
                                                             <input required  type="radio" class="form-control form-control-user" id="exampleMiddleInitial"
-                                                                name="ClarityOfTheMainMessage" value='2'>
+                                                                name="ClarityOfMainMessage" value='2'>
                                                         </div>
                                                         <div class="col-sm-1 mb-3 mb-sm-0">
                                                             <a>Average</a>
                                                         </div>
                                                         <div class="col-sm-1 mb-3 mb-sm-0">
                                                             <input required  type="radio" class="form-control form-control-user" id="exampleMiddleInitial"
-                                                                name="ClarityOfTheMainMessage" value='3'>
+                                                                name="ClarityOfMainMessage" value='3'>
                                                         </div>
                                                         <div class="col-sm-1 mb-3 mb-sm-0">
                                                             <a>Good</a>
                                                         </div>
                                                         <div class="col-sm-1 mb-3 mb-sm-0">
                                                             <input required  type="radio" class="form-control form-control-user" id="exampleMiddleInitial"
-                                                                name="ClarityOfTheMainMessage" value='4'>
+                                                                name="ClarityOfMainMessage" value='4'>
                                                         </div>
                                                         <div class="col-sm-1 mb-3 mb-sm-0">
                                                             <a>Excellent</a>
                                                         </div>
                                                         <div class="col-sm-1 mb-3 mb-sm-0">
                                                             <input required  type="radio" class="form-control form-control-user" id="exampleMiddleInitial"
-                                                                name="ClarityOfTheMainMessage" value='5'>
+                                                                name="ClarityOfMainMessage" value='5'>
                                                         </div>
                                                     </div>
                                                     <div class="form-group row">
@@ -900,7 +906,7 @@
                                                             <label for="exampleIsComplete">Is Complete?</label>
                                                         </div>
                                                         <div class="col-sm-6">
-                                                            <input required  type="checkbox" class="form-control form-control-user"
+                                                            <input   type="checkbox" class="form-control form-control-user"
                                                         id="exampleIsComplete" name="exampleIsComplete" > 
                                                         </div>
                                                     </div>
@@ -1263,42 +1269,42 @@
                                                     </div>
                                                     <div class="form-group row">
                                                         <div class="col-sm-2 mb-3 mb-sm-0">
-                                                            <a>ClarityOfTheMainMessage:</a>
+                                                            <a>ClarityOfMainMessage:</a>
                                                         </div>
                                                         <div class="col-sm-1 mb-3 mb-sm-0">
                                                             <a>Poor</a>
                                                         </div>
                                                         <div class="col-sm-1 mb-3 mb-sm-0">
                                                             <input required  type="radio" class="form-control form-control-user" id="exampleMiddleInitial"
-                                                                name="ClarityOfTheMainMessage" value='1'>
+                                                                name="ClarityOfMainMessage" value='1'>
                                                         </div>
                                                         <div class="col-sm-1 mb-3 mb-sm-0">
                                                             <a>Fair</a>
                                                         </div>
                                                         <div class="col-sm-1 mb-3 mb-sm-0">
                                                             <input required  type="radio" class="form-control form-control-user" id="exampleMiddleInitial"
-                                                                name="ClarityOfTheMainMessage" value='2'>
+                                                                name="ClarityOfMainMessage" value='2'>
                                                         </div>
                                                         <div class="col-sm-1 mb-3 mb-sm-0">
                                                             <a>Average</a>
                                                         </div>
                                                         <div class="col-sm-1 mb-3 mb-sm-0">
                                                             <input required  type="radio" class="form-control form-control-user" id="exampleMiddleInitial"
-                                                                name="ClarityOfTheMainMessage" value='3'>
+                                                                name="ClarityOfMainMessage" value='3'>
                                                         </div>
                                                         <div class="col-sm-1 mb-3 mb-sm-0">
                                                             <a>Good</a>
                                                         </div>
                                                         <div class="col-sm-1 mb-3 mb-sm-0">
                                                             <input required  type="radio" class="form-control form-control-user" id="exampleMiddleInitial"
-                                                                name="ClarityOfTheMainMessage" value='4'>
+                                                                name="ClarityOfMainMessage" value='4'>
                                                         </div>
                                                         <div class="col-sm-1 mb-3 mb-sm-0">
                                                             <a>Excellent</a>
                                                         </div>
                                                         <div class="col-sm-1 mb-3 mb-sm-0">
                                                             <input required  type="radio" class="form-control form-control-user" id="exampleMiddleInitial"
-                                                                name="ClarityOfTheMainMessage" value='5'>
+                                                                name="ClarityOfMainMessage" value='5'>
                                                         </div>
                                                     </div>
                                                     <div class="form-group row">
@@ -1570,7 +1576,7 @@
                                                             <label for="exampleIsComplete">Is Complete?</label>
                                                         </div>
                                                         <div class="col-sm-6">
-                                                            <input required  type="checkbox" class="form-control form-control-user"
+                                                            <input   type="checkbox" class="form-control form-control-user"
                                                         id="exampleIsComplete" name="exampleIsComplete" > 
                                                         </div>
                                                     </div>
@@ -1595,9 +1601,10 @@
                                                 <div class="text-center">
                                                     <h1 class="h4 text-gray-900 mb-4">Delete a Review</h1>
                                                 </div>
-                                                <form class="user" action="deleteReview" method="POST">
+                                                <form class="user" action="deleteReviews" method="POST">
+                                                    {%csrf_token%}
                                                     <div class="form-group">
-                                                        <input required  type="number" class="form-control form-control-user" id="exampleReviewID"
+                                                        <input required  type="number" class="form-control form-control-user" name="exampleReviewID"
                                                             placeholder="Review ID">
                                                     </div>
                                                     </div>
